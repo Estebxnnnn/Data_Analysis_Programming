@@ -1,0 +1,56 @@
+source,source_field,target_table,target_field,transformation,notes
+ibtracs,SID,event;storm;tc_track_fix,event_id(part);sid,"event_id = sha1('ibtracs|SID|ISO_TIME')",Storm identifier (documented)
+ibtracs,ISO_TIME,event,timestamp,"parse '%Y-%m-%d %H:%M:%S' as UTC",Documented UTC
+ibtracs,USA_LAT / LAT,event,latitude,"USA_LAT if present else LAT",deg north
+ibtracs,USA_LON / LON,event,longitude,"USA_LON if present else LON; ((lon+180) mod 360)-180",deg east
+ibtracs,USA_WIND / WMO_WIND,event,severity,"USA_WIND (1-min) if present else WMO_WIND; kt",No averaging adjustment in source
+ibtracs,(file name + Last-Modified + row),event,raw_reference,"'<file>@<Last-Modified>#row=<n>'",
+ibtracs,(constant),event,event_type,"'tc_track_fix'",
+ibtracs,SEASON,storm,season,int,SH storms after 1 July belong to next season
+ibtracs,NUMBER,storm,number,int,
+ibtracs,BASIN,storm,basin,"code NA EP WP NI SI SP SA",'NA' must not be read as missing
+ibtracs,SUBBASIN,storm,subbasin,code,
+ibtracs,NAME,storm,name,"placeholder names kept, flagged",
+ibtracs,USA_ATCF_ID,storm;storm_xref,atcf_ids;atcf_id,"split on ':'",Several ids possible
+ibtracs,NATURE,tc_track_fix,nature,"DS TS ET SS NR MX",
+ibtracs,TRACK_TYPE,tc_track_fix,track_type,"exclude any value containing spur from analogs","Observed: main, PROVISIONAL, US-PROVISIONAL, spur-merge, spur-split, spur-other, US-PROVISIONAL_spur"
+ibtracs,WMO_AGENCY,tc_track_fix,wmo_agency,text,Determines averaging period
+ibtracs,(derived),tc_track_fix,wind_avg_period,"'1-min' if USA_WIND else agency",
+ibtracs,USA_PRES / WMO_PRES,tc_track_fix,pressure_hpa,"USA_PRES else WMO_PRES; mb = hPa",
+ibtracs,USA_SSHS / (derived),tc_track_fix,sshs_category,"from 1-min wind only",
+ibtracs,STORM_SPEED,tc_track_fix,storm_speed_kt,kt,
+ibtracs,STORM_DIR,tc_track_fix,storm_dir_deg,degrees,
+ibtracs,DIST2LAND,tc_track_fix,dist2land_km,km,
+ibtracs,LANDFALL,tc_track_fix,landfall_km,km,
+ibtracs,USA_AGENCY,tc_track_fix,usa_agency,"tcvitals/tcgp = preliminary",
+ibtracs,USA_RECORD,tc_track_fix,usa_record,code,
+ibtracs,USA_STATUS,tc_track_fix,usa_status,code,
+ibtracs,IFLAG,tc_track_fix,iflag,15-char string,
+gdacs,eventid + episodeid,event;tc_alert,event_id(part);gdacs_eventid;episodeid,"event_id = sha1('gdacs|eventid|episodeid')",Duplicate key
+gdacs,todate,event,timestamp,"parse ISO as UTC (confirmed by IBTrACS match)",
+gdacs,geometry.coordinates[1],event,latitude,float,Point geometry
+gdacs,geometry.coordinates[0],event,longitude,"normalize to [-180,180)",
+gdacs,severitydata.severity,event;tc_alert,severity;peak_wind_kt,"km/h / 1.852 -> kt (unit confirmed)",Peak wind so far - not current intensity
+gdacs,(request URL + ids),event,raw_reference,"'<url>#eventid=..&episodeid=..'",
+gdacs,(constant),event,event_type,"'tc_alert_episode'",
+gdacs,name / eventname,tc_alert,name,text,
+gdacs,alertlevel,tc_alert,alertlevel,"Green < Orange < Red",
+gdacs,alertscore,tc_alert,alertscore,float,
+gdacs,episodealertlevel,tc_alert,episode_alertlevel,text,
+gdacs,fromdate,tc_alert,from_utc,"ISO as UTC",
+gdacs,datemodified,tc_alert;ingestion_state,datemodified_utc;watermark_value,"ISO as UTC",Incremental watermark (no HTTP validators)
+gdacs,iscurrent,tc_alert,is_current,"'true'/'false' -> boolean",
+gdacs,country / iso3,tc_alert,countries,text,
+gdacs,source,tc_alert,reporting_source,text,"Observed: JTWC, NOAA, RSMC"
+gdacs,severitydata.severitytext,tc_alert,severity_text,text,
+nhc,id + lastUpdate,event;tc_advisory,event_id(part);nhc_id,"event_id = sha1('nhc|id|lastUpdate')",Optional source
+nhc,lastUpdate,event,timestamp,"ISO-8601 UTC",
+nhc,latitude_numeric,event,latitude,float,
+nhc,longitude_numeric,event,longitude,"normalize",
+nhc,intensity,event,severity,"kt (may arrive as text)",
+nhc,classification,tc_advisory,classification,"TD STD TS HU STS PTC TY PC",
+nhc,pressure,tc_advisory,pressure_hpa,mb,
+nhc,movementDir,tc_advisory,movement_dir_deg,degrees,
+nhc,movementSpeed,tc_advisory,movement_speed_kt,"mph x 0.868976",
+nhc,forecastTrack.zipFile,tc_advisory,forecast_track_url,url,
+nhc,trackCone.zipFile,tc_advisory,cone_url,url,

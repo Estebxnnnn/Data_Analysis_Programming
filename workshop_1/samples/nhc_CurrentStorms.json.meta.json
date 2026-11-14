@@ -1,0 +1,20 @@
+{
+  "url": "https://www.nhc.noaa.gov/CurrentStorms.json",
+  "status": 200,
+  "requested_at_utc": "2026-11-14T18:32:03Z",
+  "elapsed_s": 0.609,
+  "headers": {
+    "Content-Type": "application/json",
+    "Content-Length": "24",
+    "Last-Modified": "Thu, 12 Nov 2026 23:24:01 GMT",
+    "ETag": "\"18-6601c9b4b326f\"",
+    "Date": "Sat, 14 Nov 2026 18:32:04 GMT",
+    "Cache-Control": "max-age=300",
+    "Expires": "Sat, 14 Nov 2026 18:36:36 GMT"
+  },
+  "size_bytes": 24,
+  "sha256": "faea5cf4718512d456018c5081c2b274d7709e4f7f69e4d0bb2556d0d33360d7",
+  "not_modified": false,
+  "path": "data/raw/nhc_current_storms/2026-11-14/CurrentStorms.json",
+  "meta_path": null
+}

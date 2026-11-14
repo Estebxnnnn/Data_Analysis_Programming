@@ -1,0 +1,110 @@
+erDiagram
+    SOURCE ||--o{ INGESTION_RUN : "is run by"
+    SOURCE ||--|| INGESTION_STATE : "keeps watermark in"
+    INGESTION_RUN ||--o{ EVENT : "loads"
+    INGESTION_RUN ||--o{ REJECTED_RECORD : "quarantines"
+    SOURCE ||--o{ EVENT : "produces"
+    EVENT_GROUP ||--o{ EVENT : "groups"
+    STORM ||--|| EVENT_GROUP : "is represented by"
+    EVENT ||--o| TC_TRACK_FIX : "details"
+    EVENT ||--o| TC_ALERT : "details"
+    EVENT ||--o| TC_ADVISORY : "details"
+    STORM ||--o{ STORM_XREF : "is known as"
+    STORM ||--o{ ANALOG_MATCH : "has analogs"
+    SOURCE {
+        text source_id PK
+        text name
+        text role
+        text url
+        text license
+    }
+    INGESTION_RUN {
+        bigint run_id PK
+        text source_id FK
+        text mode
+        timestamptz started_at
+        timestamptz finished_at
+        text status
+        int rows_inserted
+        int rows_updated
+        int rows_rejected
+    }
+    INGESTION_STATE {
+        text source_id PK
+        text watermark_value
+        text etag
+        text last_modified
+        text content_hash
+    }
+    EVENT {
+        text event_id PK
+        text source FK
+        text event_type
+        timestamptz timestamp
+        float latitude
+        float longitude
+        float severity
+        text raw_reference
+        bigint group_id FK
+        bigint run_id FK
+        text record_hash
+    }
+    EVENT_GROUP {
+        bigint group_id PK
+        text sid FK
+        text label
+    }
+    REJECTED_RECORD {
+        bigint rejected_id PK
+        bigint run_id FK
+        text source_id
+        text reason
+        jsonb payload
+    }
+    STORM {
+        text sid PK
+        int season
+        text basin
+        text name
+        float max_wind_kt
+        float min_pres_hpa
+    }
+    TC_TRACK_FIX {
+        text event_id PK
+        text nature
+        text track_type
+        text wind_avg_period
+        float pressure_hpa
+        int sshs_category
+        float storm_speed_kt
+        float storm_dir_deg
+    }
+    TC_ALERT {
+        text event_id PK
+        bigint gdacs_eventid
+        bigint episodeid
+        text alertlevel
+        float alertscore
+        float peak_wind_kt
+        boolean is_current
+    }
+    TC_ADVISORY {
+        text event_id PK
+        text nhc_id
+        text classification
+        float movement_speed_kt
+    }
+    STORM_XREF {
+        bigint xref_id PK
+        text sid FK
+        text atcf_id
+        bigint gdacs_eventid
+        text nhc_id
+        text match_method
+    }
+    ANALOG_MATCH {
+        text current_sid FK
+        text analog_sid FK
+        float similarity
+        int rank
+    }

@@ -1,0 +1,118 @@
+# Source registry for TC-Analog Monitor (Team 4 - Tropical Cyclone Monitoring)
+# One entry per source. Values were confirmed with real responses on 14 Nov 2026
+# (workshop_1/evidence/, notebooks/01_source_profiling.ipynb).
+#
+# schedule: cron expression (UTC) used by the orchestrator from Workshop 3 on.
+# watermark: field or HTTP validator used to detect new/changed records.
+
+defaults:
+  user_agent_env: TCMON_USER_AGENT      # descriptive UA with a contact e-mail
+  timeout_seconds: 60
+  max_retries: 4
+  min_seconds_between_requests: 1.0
+  raw_dir: data/raw
+
+sources:
+
+  ibtracs_since1980:
+    role: historical
+    owner: NOAA National Centers for Environmental Information (NCEI)
+    url: https://www.ncei.noaa.gov/data/international-best-track-archive-for-climate-stewardship-ibtracs/v04r01/access/csv/ibtracs.since1980.list.v04r01.csv  # verified HTTP 200, 145.4 MB
+    docs:
+      - https://www.ncei.noaa.gov/node/1660
+      - https://www.ncei.noaa.gov/sites/default/files/2025-09/IBTrACS_v04r01_column_documentation.pdf
+    format: csv
+    access: https_file
+    auth: none
+    rate_limit: none published, no rate-limit headers observed; download once per release (100 s) and cache
+    schedule: "0 6 * * 1"            # weekly release check (IBTrACS updates Sun/Tue/Thu)
+    watermark: http_etag_last_modified
+    partition_by: [SEASON, BASIN]
+    duplicate_key: [SID, ISO_TIME]  # verified unique: 0 duplicates in 312,394 fixes
+    exclude_from_analogs: TRACK_TYPE contains 'spur' (spur-merge, spur-split, spur-other, US-PROVISIONAL_spur)
+    quirks: [units row on line 2, missing values = single space, LON up to 266.9 (normalize)]
+    time_coverage: 1980-present
+    license: NOAA public data; no warranty
+    attribution: >-
+      Knapp et al. (2010) BAMS 91:363-376, doi:10.1175/2009BAMS2755.1; and
+      Gahtan et al. (2024) IBTrACS v04r01, NOAA NCEI, doi:10.25921/82ty-9e16 [access date]
+
+  gdacs_tc_archive:
+    role: historical
+    owner: GDACS (European Commission Joint Research Centre and UN OCHA)
+    url: https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH
+    params:
+      eventlist: TC
+      alertlevel: green;orange;red     # all levels returned when listed explicitly (verified)
+      fromdate: "{from:%Y-%m-%d}"
+      todate: "{to:%Y-%m-%d}"
+      pagenumber: "{page}"
+    detail_url: https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=TC&eventid={eventid}
+    geometry_url: https://www.gdacs.org/gdacsapi/api/polygons/getgeometry?eventtype=TC&eventid={eventid}&episodeid={episodeid}
+    format: geojson
+    access: rest_api
+    auth: none
+    rate_limit: none published; no rate-limit, ETag or Last-Modified headers; client throttled to 1 req/s
+    page_size: 100                    # verified (full-year 2015 and 2020 queries)
+    end_of_results: HTTP 204 with empty body   # verified
+    timezone: UTC (no offset in strings; verified by matching IBTrACS)
+    severity: km/h, peak wind so far (verified) -> tc_alert.peak_wind_kt
+    schedule: null                    # one-off monthly backfill
+    watermark: last_completed_month
+    partition_by: [month]
+    duplicate_key: [eventid, episodeid]  # dedupe: month windows repeat boundary storms
+    time_coverage: "2015-present (probe: none 1995-2005 and 2010, 1 event 2008, full pages 2015 and 2020)"
+    license: GDACS terms of use, March 2025
+    attribution: GDACS - Global Disaster Alert and Coordination System, a cooperation framework of the UN and the European Commission
+
+  ibtracs_active:
+    role: incremental
+    owner: NOAA National Centers for Environmental Information (NCEI)
+    url: https://www.ncei.noaa.gov/data/international-best-track-archive-for-climate-stewardship-ibtracs/v04r01/access/csv/ibtracs.ACTIVE.list.v04r01.csv  # verified HTTP 200; conditional GET -> 304 verified
+    format: csv
+    access: https_file_conditional_get
+    auth: none
+    schedule: "0 */3 * * *"          # every 3 hours
+    watermark: http_etag_last_modified   # fallback: sha256 of body
+    overlap_window: full_file_7_days
+    duplicate_key: [SID, ISO_TIME]
+    license: NOAA public data; no warranty
+    attribution: same as ibtracs_since1980
+
+  gdacs_tc_current:
+    role: incremental
+    owner: GDACS (European Commission Joint Research Centre and UN OCHA)
+    url: https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH
+    params:
+      eventlist: TC
+      alertlevel: green;orange;red
+      fromdate: "{watermark_minus_overlap:%Y-%m-%d}"
+      todate: "{today:%Y-%m-%d}"
+    format: geojson
+    access: rest_api
+    auth: none
+    schedule: "0 * * * *"            # hourly
+    watermark: datemodified           # no HTTP validators are sent
+    overlap_window_hours: 72          # CEMPAKA-26 modified 37 h after its last position
+    duplicate_key: [eventid, episodeid]
+    license: GDACS terms of use, March 2025
+    attribution: GDACS - Global Disaster Alert and Coordination System
+
+  nhc_current_storms:              # OPTIONAL enrichment, Atlantic + E/C Pacific only
+    role: optional_incremental
+    enabled: false
+    owner: NOAA NWS National Hurricane Center
+    url: https://www.nhc.noaa.gov/CurrentStorms.json
+    gis_index: https://www.nhc.noaa.gov/gis/
+    docs:
+      - https://www.nhc.noaa.gov/productexamples/NHC_Tropical_Cyclone_Status_JSON_File_Reference.pdf
+    format: json
+    access: https_file
+    auth: none
+    schedule: "0 * * * *"
+    watermark: lastUpdate
+    duplicate_key: [id, lastUpdate]
+    empty_response: '{"activeStorms": []}'   # documented and observed on 14 Nov 2026
+    min_poll_seconds: 300             # Cache-Control: max-age=300
+    license: US Government work (public domain)
+    attribution: NOAA National Hurricane Center

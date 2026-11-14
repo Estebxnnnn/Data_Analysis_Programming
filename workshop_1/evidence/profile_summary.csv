@@ -1,0 +1,11 @@
+,S1,S3,S2,S4
+records,312394,139,106,3
+duplicated_ids,0,0,14,0
+timestamp_parse_rate_%,100.0,100.0,100.0,100.0
+timestamp_example_raw,1980-01-01 00:00:00+00:00,2026-11-02 12:00:00+00:00,2024-02-02T06:00:00,2026-11-12T15:00:00
+lat_range,"(np.float64(-68.5), np.float64(70.7))","(np.float64(-13.5), np.float64(30.2))","(np.float64(-33.09), np.float64(49.0))","(np.float64(-11.8), np.float64(30.2))"
+lon_range,"(np.float64(-179.8), np.float64(266.9))","(np.float64(-169.9), np.float64(154.1))","(np.float64(-179.2), np.float64(179.3))","(np.float64(-173.4), np.float64(154.1))"
+invalid_lat,0,0,0,0
+lon_outside_-180_180,7639,0,0,0
+severity_range,"(np.float64(3.0), np.float64(185.0))","(np.float64(nan), np.float64(nan))","(np.float64(46.296), np.float64(287.0352))","(np.float64(63.332928), np.float64(175.9248))"
+severity_null_%,61.3,100.0,0.0,0.0

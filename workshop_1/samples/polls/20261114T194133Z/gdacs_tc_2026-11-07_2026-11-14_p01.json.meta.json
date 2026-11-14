@@ -1,0 +1,15 @@
+{
+  "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2026-11-07&todate=2026-11-14&alertlevel=green%3Borange%3Bred&pagenumber=1",
+  "status": 200,
+  "requested_at_utc": "2026-11-14T19:41:34Z",
+  "elapsed_s": 2.453,
+  "headers": {
+    "Content-Type": "application/json; charset=utf-8",
+    "Date": "Sat, 14 Nov 2026 19:41:37 GMT"
+  },
+  "size_bytes": 4115,
+  "sha256": "f587f81ef8a95bad3c013aa144f65b36e634c8be7dbae99438cf2c2748933df1",
+  "not_modified": false,
+  "path": "workshop_1/samples/polls/20261114T194133Z/gdacs_tc_2026-11-07_2026-11-14_p01.json",
+  "meta_path": null
+}

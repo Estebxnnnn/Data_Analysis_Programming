@@ -1,0 +1,16 @@
+{
+  "url": "https://www.ncei.noaa.gov/data/international-best-track-archive-for-climate-stewardship-ibtracs/v04r01/access/csv/ibtracs.ACTIVE.list.v04r01.csv",
+  "status": 304,
+  "requested_at_utc": "2026-11-14T19:41:34Z",
+  "elapsed_s": 0.11,
+  "headers": {
+    "Last-Modified": "Thu, 12 Nov 2026 10:05:25 GMT",
+    "ETag": "\"10667-66011734911b2\"",
+    "Date": "Sat, 14 Nov 2026 19:41:34 GMT"
+  },
+  "size_bytes": 0,
+  "sha256": null,
+  "not_modified": true,
+  "path": null,
+  "meta_path": null
+}

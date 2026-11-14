@@ -1,0 +1,11 @@
+id,source,problem,observed,count,example
+DQ1,S1,Wind from a 10-min agency without a 1-min USA_WIND,True,12690,"{""SID"": ""1980002S15081"", ""ISO_TIME"": ""1980-01-02 00:00:00+00:00"", ""BASIN"": ""SI"", ""WMO_AGENCY"": ""reunion"", ""WMO_WIND"": 29.0, ""USA_WIND"": NaN}"
+DQ2,S1,Missing numeric values written as blank strings + units header row,True,191391,"{""SID"": ""1980001S13173"", ""ISO_TIME"": ""1980-01-01 00:00:00"", ""WMO_WIND"": "" "", ""WMO_PRES"": "" ""}"
+DQ3,S1,Spur track types (position disagreement),True,1169,"{""SID"": ""1980002S15081"", ""ISO_TIME"": ""1980-01-01 12:00:00+00:00"", ""TRACK_TYPE"": ""spur-other"", ""LAT"": -15.2, ""LON"": 80.5}"
+DQ3b,S3,Provisional fixes subject to revision,True,139,"{""SID"": ""2026307N08230"", ""ISO_TIME"": ""2026-11-02 12:00:00+00:00"", ""TRACK_TYPE"": ""PROVISIONAL"", ""USA_AGENCY"": ""nhc_working_bt"", ""USA_WIND"": 20}"
+DQ4,S1,Several ATCF ids joined by ':',False,0,
+DQ4b,S1,Placeholder name for unnamed storms,True,38257,"{""SID"": ""1980010S20043"", ""SEASON"": 1980, ""BASIN"": ""SI"", ""NAME"": ""UNNAMED""}"
+DQ5,S2,Timestamp string without time-zone designator,True,106,"{""eventid"": 1001045, ""episodeid"": 11, ""fromdate"": ""2024-01-30T18:00:00"", ""todate"": ""2024-02-02T06:00:00"", ""datemodified"": ""2024-02-03T05:35:27""}"
+DQ5b,S2,Severity not in knots,True,106,"{""eventid"": 1001045, ""name"": ""Tropical Cyclone 05-20232024-24"", ""severity"": 94.999392, ""severityunit"": ""km/h"", ""severitytext"": ""Tropical Depression (maximum wind speed of 95 km/h)""}"
+DQ6,S2,Same storm represented by several episodes/features,True,28,"{""eventid"": 1001043, ""episodeid"": 14, ""name"": ""Tropical Cyclone KIRRILY-24"", ""alertlevel"": ""Green"", ""todate"": ""2024-02-02T06:00:00""}"
+DQ7,S1,"Longitude outside [-180, 180] (needs normalization)",True,7639,"{""SID"": ""1980001S13173"", ""ISO_TIME"": ""1980-01-05 00:00:00+00:00"", ""LAT"": -19.6, ""LON"": 180.7}"

@@ -1,0 +1,464 @@
+[
+  {
+    "source": "ibtracs_since1980",
+    "url": "https://www.ncei.noaa.gov/data/international-best-track-archive-for-climate-stewardship-ibtracs/v04r01/access/csv/ibtracs.since1980.list.v04r01.csv",
+    "status": 200,
+    "requested_at_utc": "2026-11-14T18:29:30Z",
+    "elapsed_s": 100.422,
+    "headers": {
+      "Content-Type": "text/csv",
+      "Content-Length": "145369034",
+      "Last-Modified": "Thu, 12 Nov 2026 10:06:32 GMT",
+      "ETag": "\"8aa27ca-660117753cc51\"",
+      "Date": "Sat, 14 Nov 2026 18:29:30 GMT"
+    },
+    "size_bytes": 145369034,
+    "sha256": "2200fc253d536d7cdc60baef766c8c64c54ebbcd0cdb91bfe182d249cdf236f7",
+    "not_modified": false,
+    "path": "data/raw/ibtracs_since1980/2026-11-14/ibtracs.since1980.list.v04r01.csv",
+    "meta_path": "data/raw/ibtracs_since1980/2026-11-14/ibtracs.since1980.list.v04r01.csv.meta.json"
+  },
+  {
+    "source": "ibtracs_active",
+    "url": "https://www.ncei.noaa.gov/data/international-best-track-archive-for-climate-stewardship-ibtracs/v04r01/access/csv/ibtracs.ACTIVE.list.v04r01.csv",
+    "status": 200,
+    "requested_at_utc": "2026-11-14T18:31:10Z",
+    "elapsed_s": 0.61,
+    "headers": {
+      "Content-Type": "text/csv",
+      "Content-Length": "67175",
+      "Last-Modified": "Thu, 12 Nov 2026 10:05:25 GMT",
+      "ETag": "\"10667-66011734911b2\"",
+      "Date": "Sat, 14 Nov 2026 18:31:11 GMT"
+    },
+    "size_bytes": 67175,
+    "sha256": "51e6d4116d1e0ac424ae71488c0f158d6ef6daac623f7741f76976d9164101d9",
+    "not_modified": false,
+    "path": "data/raw/ibtracs_active/2026-11-14/ibtracs.ACTIVE.list.v04r01.csv",
+    "meta_path": "data/raw/ibtracs_active/2026-11-14/ibtracs.ACTIVE.list.v04r01.csv.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-01-01&todate=2024-01-31&alertlevel=green%3Borange%3Bred&pagenumber=1",
+    "status": 200,
+    "requested_at_utc": "2026-11-14T18:31:11Z",
+    "elapsed_s": 8.922,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8",
+      "Date": "Sat, 14 Nov 2026 18:31:20 GMT"
+    },
+    "size_bytes": 8649,
+    "sha256": "01cc321045cfccd6940ea524115bbfc58c4ac9d68ffb5fbe9955a14b6bf12a86",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-01-01_2024-01-31_p01.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-01-01_2024-01-31_p01.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-01-01&todate=2024-01-31&alertlevel=green%3Borange%3Bred&pagenumber=2",
+    "status": 204,
+    "requested_at_utc": "2026-11-14T18:31:20Z",
+    "elapsed_s": 1.625,
+    "headers": {
+      "Date": "Sat, 14 Nov 2026 18:31:21 GMT"
+    },
+    "size_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-01-01_2024-01-31_p02.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-01-01_2024-01-31_p02.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-02-01&todate=2024-02-29&alertlevel=green%3Borange%3Bred&pagenumber=1",
+    "status": 200,
+    "requested_at_utc": "2026-11-14T18:31:22Z",
+    "elapsed_s": 2.359,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8",
+      "Date": "Sat, 14 Nov 2026 18:31:24 GMT"
+    },
+    "size_bytes": 12506,
+    "sha256": "73b2365730ebadb06dbe287f9acdf0fdcc61a8401011ad44fa78437925887e34",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-02-01_2024-02-29_p01.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-02-01_2024-02-29_p01.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-02-01&todate=2024-02-29&alertlevel=green%3Borange%3Bred&pagenumber=2",
+    "status": 204,
+    "requested_at_utc": "2026-11-14T18:31:24Z",
+    "elapsed_s": 0.562,
+    "headers": {
+      "Date": "Sat, 14 Nov 2026 18:31:24 GMT"
+    },
+    "size_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-02-01_2024-02-29_p02.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-02-01_2024-02-29_p02.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-03-01&todate=2024-03-31&alertlevel=green%3Borange%3Bred&pagenumber=1",
+    "status": 200,
+    "requested_at_utc": "2026-11-14T18:31:25Z",
+    "elapsed_s": 2.172,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8",
+      "Date": "Sat, 14 Nov 2026 18:31:27 GMT"
+    },
+    "size_bytes": 5967,
+    "sha256": "6bac1c9ab9fa2fc1e03518405b9bc0613cbde154ca1dd8ddcff1b979d9cfc1fe",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-03-01_2024-03-31_p01.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-03-01_2024-03-31_p01.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-03-01&todate=2024-03-31&alertlevel=green%3Borange%3Bred&pagenumber=2",
+    "status": 204,
+    "requested_at_utc": "2026-11-14T18:31:27Z",
+    "elapsed_s": 3.078,
+    "headers": {
+      "Date": "Sat, 14 Nov 2026 18:31:27 GMT"
+    },
+    "size_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-03-01_2024-03-31_p02.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-03-01_2024-03-31_p02.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-04-01&todate=2024-04-30&alertlevel=green%3Borange%3Bred&pagenumber=1",
+    "status": 200,
+    "requested_at_utc": "2026-11-14T18:31:30Z",
+    "elapsed_s": 2.922,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8",
+      "Date": "Sat, 14 Nov 2026 18:31:32 GMT"
+    },
+    "size_bytes": 2769,
+    "sha256": "b12d0abde202563f73e8c7ff1916e35ad1fd30a90626bdf69240f6673b74917a",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-04-01_2024-04-30_p01.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-04-01_2024-04-30_p01.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-04-01&todate=2024-04-30&alertlevel=green%3Borange%3Bred&pagenumber=2",
+    "status": 204,
+    "requested_at_utc": "2026-11-14T18:31:33Z",
+    "elapsed_s": 0.531,
+    "headers": {
+      "Date": "Sat, 14 Nov 2026 18:31:33 GMT"
+    },
+    "size_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-04-01_2024-04-30_p02.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-04-01_2024-04-30_p02.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-05-01&todate=2024-05-31&alertlevel=green%3Borange%3Bred&pagenumber=1",
+    "status": 200,
+    "requested_at_utc": "2026-11-14T18:31:33Z",
+    "elapsed_s": 4.75,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8",
+      "Date": "Sat, 14 Nov 2026 18:31:38 GMT"
+    },
+    "size_bytes": 7511,
+    "sha256": "b75b9f1726239c28581e63ea21ad09c3fae45b686c20fa10b6a8f9d0f8fc2cc0",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-05-01_2024-05-31_p01.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-05-01_2024-05-31_p01.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-05-01&todate=2024-05-31&alertlevel=green%3Borange%3Bred&pagenumber=2",
+    "status": 204,
+    "requested_at_utc": "2026-11-14T18:31:38Z",
+    "elapsed_s": 0.406,
+    "headers": {
+      "Date": "Sat, 14 Nov 2026 18:31:38 GMT"
+    },
+    "size_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-05-01_2024-05-31_p02.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-05-01_2024-05-31_p02.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-06-01&todate=2024-06-30&alertlevel=green%3Borange%3Bred&pagenumber=1",
+    "status": 200,
+    "requested_at_utc": "2026-11-14T18:31:39Z",
+    "elapsed_s": 3.188,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8",
+      "Date": "Sat, 14 Nov 2026 18:31:41 GMT"
+    },
+    "size_bytes": 4925,
+    "sha256": "df13f7d33b046e014ee0b5d6e07d2823097bc5992d7b55658d5e3ca380b0b7e5",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-06-01_2024-06-30_p01.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-06-01_2024-06-30_p01.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-06-01&todate=2024-06-30&alertlevel=green%3Borange%3Bred&pagenumber=2",
+    "status": 204,
+    "requested_at_utc": "2026-11-14T18:31:42Z",
+    "elapsed_s": 0.391,
+    "headers": {
+      "Date": "Sat, 14 Nov 2026 18:31:42 GMT"
+    },
+    "size_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-06-01_2024-06-30_p02.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-06-01_2024-06-30_p02.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-07-01&todate=2024-07-31&alertlevel=green%3Borange%3Bred&pagenumber=1",
+    "status": 200,
+    "requested_at_utc": "2026-11-14T18:31:42Z",
+    "elapsed_s": 2.032,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8",
+      "Date": "Sat, 14 Nov 2026 18:31:44 GMT"
+    },
+    "size_bytes": 11703,
+    "sha256": "36da51def5b58d2e9818ef484c24049b1c62ea9fefa6347613ac10a08e8d1714",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-07-01_2024-07-31_p01.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-07-01_2024-07-31_p01.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-07-01&todate=2024-07-31&alertlevel=green%3Borange%3Bred&pagenumber=2",
+    "status": 204,
+    "requested_at_utc": "2026-11-14T18:31:44Z",
+    "elapsed_s": 0.703,
+    "headers": {
+      "Date": "Sat, 14 Nov 2026 18:31:45 GMT"
+    },
+    "size_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-07-01_2024-07-31_p02.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-07-01_2024-07-31_p02.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-08-01&todate=2024-08-31&alertlevel=green%3Borange%3Bred&pagenumber=1",
+    "status": 200,
+    "requested_at_utc": "2026-11-14T18:31:45Z",
+    "elapsed_s": 4.172,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8",
+      "Date": "Sat, 14 Nov 2026 18:31:48 GMT"
+    },
+    "size_bytes": 22531,
+    "sha256": "8fc2f38690f7a6ab8051436485f75f1df9e423aa9142e84219ad5194adacc63a",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-08-01_2024-08-31_p01.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-08-01_2024-08-31_p01.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-08-01&todate=2024-08-31&alertlevel=green%3Borange%3Bred&pagenumber=2",
+    "status": 204,
+    "requested_at_utc": "2026-11-14T18:31:49Z",
+    "elapsed_s": 0.563,
+    "headers": {
+      "Date": "Sat, 14 Nov 2026 18:31:49 GMT"
+    },
+    "size_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-08-01_2024-08-31_p02.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-08-01_2024-08-31_p02.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-09-01&todate=2024-09-30&alertlevel=green%3Borange%3Bred&pagenumber=1",
+    "status": 200,
+    "requested_at_utc": "2026-11-14T18:31:50Z",
+    "elapsed_s": 3.5,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8",
+      "Date": "Sat, 14 Nov 2026 18:31:53 GMT"
+    },
+    "size_bytes": 29152,
+    "sha256": "05644d2fc8ef7c43d0e94ef3f17d534be99edeac36a3eaf2107344fa7a12786f",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-09-01_2024-09-30_p01.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-09-01_2024-09-30_p01.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-09-01&todate=2024-09-30&alertlevel=green%3Borange%3Bred&pagenumber=2",
+    "status": 204,
+    "requested_at_utc": "2026-11-14T18:31:53Z",
+    "elapsed_s": 0.656,
+    "headers": {
+      "Date": "Sat, 14 Nov 2026 18:31:54 GMT"
+    },
+    "size_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-09-01_2024-09-30_p02.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-09-01_2024-09-30_p02.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-10-01&todate=2024-10-31&alertlevel=green%3Borange%3Bred&pagenumber=1",
+    "status": 200,
+    "requested_at_utc": "2026-11-14T18:31:54Z",
+    "elapsed_s": 1.734,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8",
+      "Date": "Sat, 14 Nov 2026 18:31:55 GMT"
+    },
+    "size_bytes": 22501,
+    "sha256": "d85c5963719bb60517c693aa7b905021b95b219c8744451ee2e6d755c1d75459",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-10-01_2024-10-31_p01.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-10-01_2024-10-31_p01.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-10-01&todate=2024-10-31&alertlevel=green%3Borange%3Bred&pagenumber=2",
+    "status": 204,
+    "requested_at_utc": "2026-11-14T18:31:56Z",
+    "elapsed_s": 0.375,
+    "headers": {
+      "Date": "Sat, 14 Nov 2026 18:31:56 GMT"
+    },
+    "size_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-10-01_2024-10-31_p02.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-10-01_2024-10-31_p02.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-11-01&todate=2024-11-30&alertlevel=green%3Borange%3Bred&pagenumber=1",
+    "status": 200,
+    "requested_at_utc": "2026-11-14T18:31:56Z",
+    "elapsed_s": 2.203,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8",
+      "Date": "Sat, 14 Nov 2026 18:31:58 GMT"
+    },
+    "size_bytes": 19101,
+    "sha256": "056191b248369e0789d5e86596f61dd91d636dd22cd5bec192187106b07fcd47",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-11-01_2024-11-30_p01.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-11-01_2024-11-30_p01.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-11-01&todate=2024-11-30&alertlevel=green%3Borange%3Bred&pagenumber=2",
+    "status": 204,
+    "requested_at_utc": "2026-11-14T18:31:58Z",
+    "elapsed_s": 0.484,
+    "headers": {
+      "Date": "Sat, 14 Nov 2026 18:31:58 GMT"
+    },
+    "size_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-11-01_2024-11-30_p02.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-11-01_2024-11-30_p02.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-12-01&todate=2024-12-31&alertlevel=green%3Borange%3Bred&pagenumber=1",
+    "status": 200,
+    "requested_at_utc": "2026-11-14T18:31:59Z",
+    "elapsed_s": 1.703,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8",
+      "Date": "Sat, 14 Nov 2026 18:32:00 GMT"
+    },
+    "size_bytes": 7227,
+    "sha256": "052eed5b7aea9d8e921841c2e863b9460dba4a3f8d37d7054101f6b8304543c2",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-12-01_2024-12-31_p01.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-12-01_2024-12-31_p01.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_archive",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2024-12-01&todate=2024-12-31&alertlevel=green%3Borange%3Bred&pagenumber=2",
+    "status": 204,
+    "requested_at_utc": "2026-11-14T18:32:01Z",
+    "elapsed_s": 0.531,
+    "headers": {
+      "Date": "Sat, 14 Nov 2026 18:32:01 GMT"
+    },
+    "size_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-12-01_2024-12-31_p02.json",
+    "meta_path": "data/raw/gdacs_tc_archive/2026-11-14/gdacs_tc_2024-12-01_2024-12-31_p02.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_current",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2026-11-07&todate=2026-11-14&alertlevel=green%3Borange%3Bred&pagenumber=1",
+    "status": 200,
+    "requested_at_utc": "2026-11-14T18:32:01Z",
+    "elapsed_s": 1.547,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8",
+      "Date": "Sat, 14 Nov 2026 18:32:02 GMT"
+    },
+    "size_bytes": 4115,
+    "sha256": "f587f81ef8a95bad3c013aa144f65b36e634c8be7dbae99438cf2c2748933df1",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_current/2026-11-14/gdacs_tc_2026-11-07_2026-11-14_p01.json",
+    "meta_path": "data/raw/gdacs_tc_current/2026-11-14/gdacs_tc_2026-11-07_2026-11-14_p01.json.meta.json"
+  },
+  {
+    "source": "gdacs_tc_current",
+    "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2026-11-07&todate=2026-11-14&alertlevel=green%3Borange%3Bred&pagenumber=2",
+    "status": 204,
+    "requested_at_utc": "2026-11-14T18:32:03Z",
+    "elapsed_s": 0.719,
+    "headers": {
+      "Date": "Sat, 14 Nov 2026 18:32:03 GMT"
+    },
+    "size_bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "not_modified": false,
+    "path": "data/raw/gdacs_tc_current/2026-11-14/gdacs_tc_2026-11-07_2026-11-14_p02.json",
+    "meta_path": "data/raw/gdacs_tc_current/2026-11-14/gdacs_tc_2026-11-07_2026-11-14_p02.json.meta.json"
+  },
+  {
+    "source": "nhc_current_storms",
+    "url": "https://www.nhc.noaa.gov/CurrentStorms.json",
+    "status": 200,
+    "requested_at_utc": "2026-11-14T18:32:03Z",
+    "elapsed_s": 0.609,
+    "headers": {
+      "Content-Type": "application/json",
+      "Content-Length": "24",
+      "Last-Modified": "Thu, 12 Nov 2026 23:24:01 GMT",
+      "ETag": "\"18-6601c9b4b326f\"",
+      "Date": "Sat, 14 Nov 2026 18:32:04 GMT",
+      "Cache-Control": "max-age=300",
+      "Expires": "Sat, 14 Nov 2026 18:36:36 GMT"
+    },
+    "size_bytes": 24,
+    "sha256": "faea5cf4718512d456018c5081c2b274d7709e4f7f69e4d0bb2556d0d33360d7",
+    "not_modified": false,
+    "path": "data/raw/nhc_current_storms/2026-11-14/CurrentStorms.json",
+    "meta_path": "data/raw/nhc_current_storms/2026-11-14/CurrentStorms.json.meta.json"
+  }
+]
