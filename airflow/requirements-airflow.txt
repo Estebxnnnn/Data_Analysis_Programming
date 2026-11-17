@@ -1,0 +1,12 @@
+# Python dependencies installed in the Airflow image (versions pinned by the
+# official Airflow 2.10.5 constraints file, see airflow/Dockerfile).
+requests          # HTTP extraction (GDACS API, IBTrACS file)
+pandas            # Silver preprocessing
+numpy
+pyarrow           # Parquet writing/reading and explicit Silver schema
+PyYAML            # config/sources.yaml
+python-dotenv
+pytest            # pipeline tests inside the container
+matplotlib        # Silver exploration notebook
+nbconvert         # run the notebook headless inside the container
+ipykernel

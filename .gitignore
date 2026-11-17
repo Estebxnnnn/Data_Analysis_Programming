@@ -21,3 +21,9 @@ venv/
 .vscode/
 .idea/
 .DS_Store
+
+# Airflow runtime
+airflow/logs/*
+!airflow/logs/.gitkeep
+datalake_bronze/_staging/*
+!datalake_bronze/_staging/.gitkeep

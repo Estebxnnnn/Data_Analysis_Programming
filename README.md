@@ -32,15 +32,33 @@ Full details, licenses and attribution: [`config/sources.yaml`](config/sources.y
 IBTrACS v04r01, NOAA NCEI, doi:10.25921/82ty-9e16. GDACS: Global Disaster Alert and Coordination System, a cooperation
 framework of the UN and the European Commission. NHC: NOAA National Hurricane Center.
 
+## Pipeline status (Workshop 2)
+Medallion data lake orchestrated by **Apache Airflow 2.10.5** in Docker Compose:
+
+| Layer | Folder | Produced by | Format |
+| --- | --- | --- | --- |
+| Bronze | `datalake_bronze/` | `bronze_ingestion` DAG (hourly): GDACS API + IBTrACS ACTIVE file | raw JSON, `<source>_YYYYMMDD_HHMMSS.json` |
+| Silver | `datalake_silver/` | `silver_processing` DAG (FileSensor on Bronze) | Parquet, `tropical_cyclones_YYYYMMDD_HHMMSS.parquet` |
+| Gold | `datalake_gold/` | Workshop 3 (PySpark) | planned |
+
+Run it: see [`workshop_2/README.md`](workshop_2/README.md) (`docker compose build`, `docker compose up airflow-init`,
+`docker compose up -d`, then <http://localhost:8080>, user/password `airflow`).
+
 ## Repository structure
 ```
 .
+├── docker-compose.yml        # Airflow (webserver, scheduler, triggerer) + PostgreSQL metadata DB
+├── airflow/                  # Dockerfile, requirements-airflow.txt, dags/, logs/, plugins/
+├── datalake_bronze/          # raw JSON per source and run (+ _pending/_claimed run manifests)
+├── datalake_silver/          # Parquet per Silver run (+ _manifest.jsonl, _rejected/)
+├── datalake_gold/            # Workshop 3
 ├── ingest.py                 # CLI entry point (stub): --mode historical | incremental
 ├── config/sources.yaml       # one entry per source: URL, format, schedule, watermark, license
 ├── src/tcmon/                # ingestion package
 │   ├── http_client.py        # polite client: UA, throttling, retries, conditional GET, raw + .meta.json
 │   ├── sources/              # ibtracs.py, gdacs.py, nhc.py
 │   ├── normalization/        # units.py, canonical.py (canonical event model)
+│   ├── pipeline/             # bronze.py, silver.py, schema.py, paths.py (Workshop 2)
 │   └── storage/              # landing zone paths (DB writer in Workshop 2)
 ├── data/raw/                 # raw landing zone (git-ignored)
 ├── sql/001_schema_draft.sql  # schema draft (common + domain tables)
@@ -50,6 +68,7 @@ framework of the UN and the European Commission. NHC: NOAA National Hurricane Ce
 ├── docs/architecture.md      # architecture overview + diagram
 ├── docs/report/              # Workshop 1 report: IEEE-format PDF + LaTeX source
 ├── workshop_1/               # mapping, ER diagram, ingestion contract, samples, evidence, tools
+├── workshop_2/               # report, preprocessing specification, evidence
 ├── .env.example
 └── requirements.txt
 ```
@@ -71,6 +90,6 @@ python dashboard/app.py                  # http://localhost:8050 (stub)
 | Workshop | Scope | Status |
 | --- | --- | --- |
 | 1 | Hazard definition, four sources validated, profiling, canonical mapping, ingestion contract, project definition | done — evidence captured 14 Nov 2026 (`workshop_1/evidence/`) |
-| 2 | Docker stack, database schema, historical ingestion with validation and quarantine | planned |
+| 2 | Docker + Airflow stack, Bronze ingestion DAG, Silver preprocessing DAG with FileSensor | in progress |
 | 3 | Incremental ingestion, watermarks, scheduling, change detection, cross-source event identification | planned |
 | 4 | Temporal and geographic analysis, SAS indicator, dashboard | planned |

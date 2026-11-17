@@ -1,0 +1,137 @@
+# TC-Analog Monitor - Docker Compose stack (Workshop 2)
+#
+# Apache Airflow 2.10.5 with LocalExecutor + PostgreSQL metadata database.
+# Sized for a laptop with ~3.3 GB available to Docker: no Celery/Redis, one
+# webserver worker, one DAG-parsing process, low task parallelism.
+#
+#   docker compose up airflow-init        # first time only: DB migration + admin user
+#   docker compose up -d                  # start the stack
+#   http://localhost:8080                 # user / password: airflow / airflow
+#   docker compose down                   # stop (data stays in the bind-mounted folders)
+
+x-airflow-common: &airflow-common
+  build: ./airflow
+  image: tcmon-airflow:2.10.5
+  environment: &airflow-common-env
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+    AIRFLOW__CORE__FERNET_KEY: ""
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
+    AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+    AIRFLOW__CORE__DEFAULT_TIMEZONE: "utc"
+    # low-memory tuning
+    AIRFLOW__CORE__PARALLELISM: "4"
+    AIRFLOW__CORE__MAX_ACTIVE_TASKS_PER_DAG: "2"
+    AIRFLOW__SCHEDULER__PARSING_PROCESSES: "1"
+    AIRFLOW__SCHEDULER__MIN_FILE_PROCESS_INTERVAL: "60"
+    AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL: "60"
+    AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: "true"
+    AIRFLOW__WEBSERVER__WORKERS: "1"
+    AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "false"
+    AIRFLOW__API__AUTH_BACKENDS: "airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session"
+    # FileSensor connection: base path for datalake_bronze/...
+    AIRFLOW_CONN_FS_DATALAKE: '{"conn_type": "fs", "extra": {"path": "/opt/airflow"}}'
+    # pipeline settings
+    TCMON_DATALAKE_ROOT: /opt/airflow
+    TCMON_USER_AGENT: ${TCMON_USER_AGENT:-TC-Analog-Monitor/0.2 (Universidad Distrital, Team 4)}
+    PYTHONPATH: /opt/airflow/src
+  volumes:
+    - ./airflow/dags:/opt/airflow/dags
+    - ./airflow/logs:/opt/airflow/logs
+    - ./airflow/plugins:/opt/airflow/plugins
+    - ./datalake_bronze:/opt/airflow/datalake_bronze
+    - ./datalake_silver:/opt/airflow/datalake_silver
+    - ./datalake_gold:/opt/airflow/datalake_gold
+    - ./src:/opt/airflow/src
+    - ./config:/opt/airflow/config
+    - ./tests:/opt/airflow/tests
+    - ./notebooks:/opt/airflow/notebooks
+  user: "${AIRFLOW_UID:-50000}:0"
+  depends_on: &airflow-common-depends-on
+    postgres:
+      condition: service_healthy
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+    restart: always
+
+  airflow-webserver:
+    <<: *airflow-common
+    command: webserver
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-scheduler:
+    <<: *airflow-common
+    command: scheduler
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8974/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-triggerer:
+    <<: *airflow-common
+    command: triggerer
+    healthcheck:
+      test: ["CMD-SHELL", 'airflow jobs check --job-type TriggererJob --hostname "$${HOSTNAME}"']
+      interval: 60s
+      timeout: 20s
+      retries: 5
+      start_period: 60s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-init:
+    <<: *airflow-common
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        mkdir -p /opt/airflow/logs /opt/airflow/dags /opt/airflow/plugins \
+                 /opt/airflow/datalake_bronze /opt/airflow/datalake_silver /opt/airflow/datalake_gold
+        chown -R "${AIRFLOW_UID:-50000}:0" /opt/airflow/logs /opt/airflow/datalake_bronze \
+                 /opt/airflow/datalake_silver /opt/airflow/datalake_gold || true
+        exec /entrypoint airflow version
+    environment:
+      <<: *airflow-common-env
+      _AIRFLOW_DB_MIGRATE: "true"
+      _AIRFLOW_WWW_USER_CREATE: "true"
+      _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}
+      _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
+    user: "0:0"
+
+volumes:
+  postgres-db-volume:
