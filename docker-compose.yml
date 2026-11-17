@@ -4,13 +4,15 @@
 # Sized for a laptop with ~3.3 GB available to Docker: no Celery/Redis, one
 # webserver worker, one DAG-parsing process, low task parallelism.
 #
+#   docker compose build airflow-init     # builds the image once (tcmon-airflow:2.10.5)
 #   docker compose up airflow-init        # first time only: DB migration + admin user
 #   docker compose up -d                  # start the stack
 #   http://localhost:8080                 # user / password: airflow / airflow
 #   docker compose down                   # stop (data stays in the bind-mounted folders)
 
 x-airflow-common: &airflow-common
-  build: ./airflow
+  # Built ONCE by airflow-init (see below) and shared by every Airflow service:
+  # building it per service runs four exports in parallel and exhausts memory.
   image: tcmon-airflow:2.10.5
   environment: &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
@@ -69,6 +71,7 @@ services:
 
   airflow-webserver:
     <<: *airflow-common
+    pull_policy: never                 # use the local image built by airflow-init
     command: webserver
     ports:
       - "8080:8080"
@@ -86,6 +89,7 @@ services:
 
   airflow-scheduler:
     <<: *airflow-common
+    pull_policy: never                 # use the local image built by airflow-init
     command: scheduler
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8974/health"]
@@ -101,6 +105,7 @@ services:
 
   airflow-triggerer:
     <<: *airflow-common
+    pull_policy: never                 # use the local image built by airflow-init
     command: triggerer
     healthcheck:
       test: ["CMD-SHELL", 'airflow jobs check --job-type TriggererJob --hostname "$${HOSTNAME}"']
@@ -116,6 +121,7 @@ services:
 
   airflow-init:
     <<: *airflow-common
+    build: ./airflow                 # the only service that builds the image (only when missing)
     entrypoint: /bin/bash
     command:
       - -c

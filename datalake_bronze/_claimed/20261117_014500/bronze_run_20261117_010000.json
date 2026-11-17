@@ -1,0 +1,8 @@
+{
+ "run_ts": "20261117_010000",
+ "bronze_files": [
+  "gdacs_tc_20261117_010000.json",
+  "ibtracs_active_20261117_010000.json"
+ ],
+ "written_at_utc": "2026-11-17T02:03:55+00:00"
+}

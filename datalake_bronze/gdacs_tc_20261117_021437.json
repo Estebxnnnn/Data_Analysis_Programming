@@ -1,0 +1,270 @@
+{
+ "source": "gdacs_tc",
+ "run_ts": "20261117_021437",
+ "ingested_at_utc": "2026-11-17T02:15:37+00:00",
+ "http": [
+  {
+   "url": "https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&fromdate=2026-11-10&todate=2026-11-17&alertlevel=green%3Borange%3Bred&pagenumber=1",
+   "status": 200,
+   "requested_at_utc": "2026-11-17T02:15:18Z",
+   "elapsed_s": 4.995,
+   "headers": {
+    "Content-Type": "application/json; charset=utf-8",
+    "Date": "Tue, 17 Nov 2026 02:15:22 GMT"
+   },
+   "size_bytes": 5516,
+   "sha256": "9024fc35a8301b4189866db8f415854f4f92989ac256995039ca087a413b1630",
+   "not_modified": false,
+   "path": "/opt/airflow/datalake_bronze/_staging/gdacs_tc_20261117_021437_p01.json",
+   "meta_path": "/opt/airflow/datalake_bronze/_staging/gdacs_tc_20261117_021437_p01.json.meta.json"
+  }
+ ],
+ "validation": {
+  "source": "gdacs_tc",
+  "checked_at_utc": "2026-11-17T02:15:32+00:00",
+  "records": 4,
+  "missing_fields": [],
+  "non_point_geometry": 0,
+  "passed": true
+ },
+ "record_count": 4,
+ "format": "geojson_features",
+ "window": {
+  "fromdate": "2026-11-10",
+  "todate": "2026-11-17"
+ },
+ "records": [
+  {
+   "type": "Feature",
+   "bbox": [
+    86.7,
+    11.3,
+    86.7,
+    11.3
+   ],
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     86.7,
+     11.3
+    ]
+   },
+   "properties": {
+    "eventtype": "TC",
+    "eventid": 1001351,
+    "episodeid": 1,
+    "eventname": "AKVAN-26",
+    "glide": "",
+    "name": "Tropical Cyclone AKVAN-26",
+    "description": "Tropical Cyclone AKVAN-26",
+    "htmldescription": "Orange Tropical Cyclone AKVAN-26 in India from: 16 Nov 2026  to: 16 Nov 2026 .",
+    "icon": "https://www.gdacs.org/images/gdacs_icons/maps/Orange/TC.png",
+    "iconoverall": "https://www.gdacs.org/images/gdacs_icons/maps/Orange/TC.png",
+    "url": {
+     "geometry": "https://www.gdacs.org/gdacsapi/api/polygons/getgeometry?eventtype=TC&eventid=1001351&episodeid=1",
+     "report": "https://www.gdacs.org/report.aspx?eventid=1001351&episodeid=1&eventtype=TC",
+     "details": "https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=TC&eventid=1001351"
+    },
+    "alertlevel": "Orange",
+    "alertscore": 2,
+    "episodealertlevel": "Orange",
+    "episodealertscore": 2.0,
+    "istemporary": "false",
+    "iscurrent": "true",
+    "country": "India",
+    "fromdate": "2026-11-16T18:00:00",
+    "todate": "2026-11-16T18:00:00",
+    "datemodified": "2026-11-17T02:05:47",
+    "iso3": "IND",
+    "source": "JTWC",
+    "sourceid": "",
+    "polygonlabel": "Centroid",
+    "Class": "Point_Centroid",
+    "countryonland": "",
+    "affectedcountries": [
+     {
+      "iso2": "IN",
+      "iso3": "IND",
+      "countryname": "India"
+     }
+    ],
+    "severitydata": {
+     "severity": 92.592,
+     "severitytext": "Tropical Storm (maximum wind speed of 93 km/h)",
+     "severityunit": "km/h"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "bbox": [
+    -162.6,
+    -8.9,
+    -162.6,
+    -8.9
+   ],
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -162.6,
+     -8.9
+    ]
+   },
+   "properties": {
+    "eventtype": "TC",
+    "eventid": 1001350,
+    "episodeid": 4,
+    "eventname": "XAVIER-26",
+    "glide": "",
+    "name": "Tropical Cyclone XAVIER-26",
+    "description": "Tropical Cyclone XAVIER-26",
+    "htmldescription": "Green Tropical Cyclone XAVIER-26 in Cook Islands from: 15 Nov 2026  to: 16 Nov 2026 .",
+    "icon": "https://www.gdacs.org/images/gdacs_icons/maps/Green/TC.png",
+    "iconoverall": "https://www.gdacs.org/images/gdacs_icons/maps/Green/TC.png",
+    "url": {
+     "geometry": "https://www.gdacs.org/gdacsapi/api/polygons/getgeometry?eventtype=TC&eventid=1001350&episodeid=4",
+     "report": "https://www.gdacs.org/report.aspx?eventid=1001350&episodeid=4&eventtype=TC",
+     "details": "https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=TC&eventid=1001350"
+    },
+    "alertlevel": "Green",
+    "alertscore": 1,
+    "episodealertlevel": "Green",
+    "episodealertscore": 1.0,
+    "istemporary": "false",
+    "iscurrent": "true",
+    "country": "Cook Islands",
+    "fromdate": "2026-11-15T06:00:00",
+    "todate": "2026-11-16T18:00:00",
+    "datemodified": "2026-11-16T20:35:58",
+    "iso3": "COK",
+    "source": "JTWC",
+    "sourceid": "",
+    "polygonlabel": "Centroid",
+    "Class": "Point_Centroid",
+    "countryonland": "",
+    "affectedcountries": [],
+    "severitydata": {
+     "severity": 222.2208,
+     "severitytext": "Hurricane/Typhoon > 74 mph (maximum wind speed of 222 km/h)",
+     "severityunit": "km/h"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "bbox": [
+    -173.4,
+    9.8,
+    -173.4,
+    9.8
+   ],
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -173.4,
+     9.8
+    ]
+   },
+   "properties": {
+    "eventtype": "TC",
+    "eventid": 1001348,
+    "episodeid": 24,
+    "eventname": "PENA-26",
+    "glide": "",
+    "name": "Tropical Cyclone PENA-26",
+    "description": "Tropical Cyclone PENA-26",
+    "htmldescription": "Green Tropical Cyclone PENA-26 off-shore from: 06 Nov 2026  to: 12 Nov 2026 .",
+    "icon": "https://www.gdacs.org/images/gdacs_icons/maps/Green/TC.png",
+    "iconoverall": "https://www.gdacs.org/images/gdacs_icons/maps/Green/TC.png",
+    "url": {
+     "geometry": "https://www.gdacs.org/gdacsapi/api/polygons/getgeometry?eventtype=TC&eventid=1001348&episodeid=24",
+     "report": "https://www.gdacs.org/report.aspx?eventid=1001348&episodeid=24&eventtype=TC",
+     "details": "https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=TC&eventid=1001348"
+    },
+    "alertlevel": "Green",
+    "alertscore": 1,
+    "episodealertlevel": "Green",
+    "episodealertscore": 1.0,
+    "istemporary": "false",
+    "iscurrent": "false",
+    "country": "",
+    "fromdate": "2026-11-06T21:00:00",
+    "todate": "2026-11-12T15:00:00",
+    "datemodified": "2026-11-12T14:52:09",
+    "iso3": "",
+    "source": "NOAA",
+    "sourceid": "",
+    "polygonlabel": "Centroid",
+    "Class": "Point_Centroid",
+    "countryonland": "",
+    "affectedcountries": [],
+    "severitydata": {
+     "severity": 92.592,
+     "severitytext": "Tropical Depression (maximum wind speed of 93 km/h)",
+     "severityunit": "km/h"
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "bbox": [
+    154.1,
+    30.2,
+    154.1,
+    30.2
+   ],
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     154.1,
+     30.2
+    ]
+   },
+   "properties": {
+    "eventtype": "TC",
+    "eventid": 1001347,
+    "episodeid": 22,
+    "eventname": "CEMPAKA-26",
+    "glide": "",
+    "name": "Tropical Cyclone CEMPAKA-26",
+    "description": "Tropical Cyclone CEMPAKA-26",
+    "htmldescription": "Green Tropical Cyclone CEMPAKA-26 in Japan from: 06 Nov 2026  to: 11 Nov 2026 .",
+    "icon": "https://www.gdacs.org/images/gdacs_icons/maps/Green/TC.png",
+    "iconoverall": "https://www.gdacs.org/images/gdacs_icons/maps/Green/TC.png",
+    "url": {
+     "geometry": "https://www.gdacs.org/gdacsapi/api/polygons/getgeometry?eventtype=TC&eventid=1001347&episodeid=22",
+     "report": "https://www.gdacs.org/report.aspx?eventid=1001347&episodeid=22&eventtype=TC",
+     "details": "https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=TC&eventid=1001347"
+    },
+    "alertlevel": "Green",
+    "alertscore": 1,
+    "episodealertlevel": "Green",
+    "episodealertscore": 1.0,
+    "istemporary": "false",
+    "iscurrent": "false",
+    "country": "Japan",
+    "fromdate": "2026-11-06T06:00:00",
+    "todate": "2026-11-11T12:00:00",
+    "datemodified": "2026-11-13T00:50:32",
+    "iso3": "JPN",
+    "source": "JTWC",
+    "sourceid": "",
+    "polygonlabel": "Centroid",
+    "Class": "Point_Centroid",
+    "countryonland": "",
+    "affectedcountries": [
+     {
+      "iso2": "JP",
+      "iso3": "JPN",
+      "countryname": "Japan"
+     }
+    ],
+    "severitydata": {
+     "severity": 175.9248,
+     "severitytext": "Hurricane/Typhoon > 74 mph (maximum wind speed of 176 km/h)",
+     "severityunit": "km/h"
+    }
+   }
+  }
+ ]
+}
