@@ -5,7 +5,8 @@ A **FileSensor** watches `datalake_bronze/_pending/` for the run manifest that t
 Bronze DAG writes after both raw JSON files are complete. When one arrives, the
 batch is claimed, cleaned with Pandas and written as
 `datalake_silver/tropical_cyclones_YYYYMMDD_HHMMSS.parquet` (timestamp of this
-processing run).
+processing run). A batch with no new or changed record writes no file; the
+run is still recorded in `datalake_silver/_manifest.jsonl` (Workshop 3).
 
 | Task | What it does |
 | --- | --- |
@@ -69,7 +70,7 @@ def silver_processing():
 
     @task
     def claim_bronze_batch() -> dict:
-        silver_ts = paths.ts_string(get_current_context()["logical_date"])
+        silver_ts = paths.ts_string(paths.run_moment(get_current_context()))
         manifests = silver.claim_batch(silver_ts)
         files = silver.bronze_files_of(manifests)
         if not files:
@@ -88,6 +89,10 @@ def silver_processing():
     @task
     def verify_parquet(summary: dict) -> dict:
         import pandas as pd
+        if not summary.get("silver_file"):
+            log.info("Silver run %s: no new or changed records, no Parquet file written (see _manifest.jsonl)",
+                     summary["silver_run_ts"])
+            return {"file": None, "rows": 0, "columns": len(COLUMNS)}
         path = paths.silver_dir() / summary["silver_file"]
         df = pd.read_parquet(path)
         if list(df.columns) != COLUMNS or len(df) != summary["rows"]:
