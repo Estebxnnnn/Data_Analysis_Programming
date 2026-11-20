@@ -11,7 +11,7 @@ run is still recorded in `datalake_silver/_manifest.jsonl` (Workshop 3).
 | Task | What it does |
 | --- | --- |
 | `wait_for_bronze_files` | FileSensor, `poke_interval` 60 s, `timeout` 14 min, `mode="reschedule"`, `soft_fail=True` |
-| `claim_bronze_batch` | Moves the pending manifest(s) to `_claimed/<silver_ts>/` (re-runs reuse them) |
+| `claim_bronze_batch` | Moves the pending manifest(s) to `_claimed/<run_ts>/` (re-runs reuse them); the Silver file takes the later of the run timestamp and the newest claimed Bronze run |
 | `preprocess_to_parquet` | Conform, types, nulls, text, outliers, dedup, schema enforcement, Parquet + lineage |
 | `verify_parquet` | Reads the file back with Pandas and checks schema and row count |
 
@@ -70,12 +70,18 @@ def silver_processing():
 
     @task
     def claim_bronze_batch() -> dict:
-        silver_ts = paths.ts_string(paths.run_moment(get_current_context()))
-        manifests = silver.claim_batch(silver_ts)
+        run_ts = paths.ts_string(paths.run_moment(get_current_context()))
+        manifests = silver.claim_batch(run_ts)
         files = silver.bronze_files_of(manifests)
         if not files:
             raise AirflowSkipException("No pending Bronze batch")
-        log.info("Silver run %s will process %s", silver_ts, files)
+        # The FileSensor may wait up to 14 min, so the Bronze run it finds can be newer than
+        # the Silver run itself. The Silver file is named with the later of the two moments,
+        # so a file never carries a timestamp older than its input (KPI F5). Re-runs claim the
+        # same manifests, hence the name stays deterministic.
+        newest_bronze = max(m.stem.removeprefix("bronze_run_") for m in manifests)
+        silver_ts = max(run_ts, newest_bronze)
+        log.info("Silver run %s (file %s) will process %s", run_ts, silver_ts, files)
         return {"silver_ts": silver_ts, "bronze_files": files}
 
     @task

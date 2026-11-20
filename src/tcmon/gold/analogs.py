@@ -15,8 +15,10 @@ last 48 h of the current track:
   that do not cover every current offset are dropped; the anchor with the lowest D is kept;
 * heading = bearing of the 6-h displacement ending at the fix; dDoy is the circular day-of-year
   difference between the current fix and the anchor;
-* weights are equal and sum to one; a term without data (e.g. no wind reported) is left out and
-  the remaining weights are rescaled, so D is the mean of the available normalized terms;
+* weights are equal and sum to one; a wind or heading term without data (old storms of some basins
+  have no wind in IBTrACS) counts as one reference unit (15 kt, 45 degrees): a neutral penalty, so
+  that an analog with unknown intensity can never look closer than one with a known intensity
+  (first Gold run, 19 Nov 2026: without it, 1980s North Indian storms with no wind ranked first);
 * bands (Workshop 1, provisional): SAS >= 70 high, 40-69 moderate, < 40 low.
 
 SAS describes resemblance with past storms. It is NOT a forecast; the "outcome" columns only
@@ -41,6 +43,7 @@ MIN_GAP_DAYS = 15
 D0_KM, V0_KT, THETA0_DEG, T0_DAYS = 250.0, 15.0, 45.0, 30.0
 WEIGHTS = {"track": 0.25, "wind": 0.25, "heading": 0.25, "doy": 0.25}
 TOP_N = 5
+MISSING_TERM = 1.0            # normalized penalty when a wind or heading difference cannot be computed
 OUTCOME_H = (24, 48, 72)
 BANDS = ((70.0, "high"), (40.0, "moderate"), (0.0, "low"))
 
@@ -135,9 +138,8 @@ def find_analogs(cur_win, ref_syn, top_n: int = TOP_N):
     agg = agg.withColumn("ddoy_days", circular_diff(doy(F.col("t0")).cast("double"), doy(F.col("ta")).cast("double"), 365.0))
     terms = {"track": F.col("track_km") / D0_KM, "wind": F.col("dv_kt") / V0_KT,
              "heading": F.col("dtheta_deg") / THETA0_DEG, "doy": F.col("ddoy_days") / T0_DAYS}
-    num = sum(F.coalesce(terms[n] * WEIGHTS[n], F.lit(0.0)) for n in terms)
-    den = sum(F.when(terms[n].isNotNull(), F.lit(WEIGHTS[n])).otherwise(F.lit(0.0)) for n in terms)
-    agg = agg.withColumn("D", num / den).withColumn("sas", F.lit(100.0) * F.exp(-F.col("D")))
+    D = sum(F.lit(WEIGHTS[n]) * F.coalesce(terms[n], F.lit(MISSING_TERM)) for n in terms)
+    agg = agg.withColumn("D", D).withColumn("sas", F.lit(100.0) * F.exp(-F.col("D")))
     best = agg.withColumn("_rn", F.row_number().over(
         Window.partitionBy("storm_id", "sid").orderBy("D", "ta"))).filter("_rn = 1").drop("_rn")
     best = best.withColumn("rank", F.row_number().over(Window.partitionBy("storm_id").orderBy("D", "sid")))
@@ -249,8 +251,7 @@ def find_analogs_pandas(silver: pd.DataFrame, reference: pd.DataFrame, top_n: in
                 da = pd.Timestamp(ta, unit="s", tz="UTC").dayofyear
                 ddoy = float(_circ(np.array([d0]), np.array([da]), 365.0)[0])
                 terms = {"track": dist / D0_KM, "wind": dv / V0_KT, "heading": dth / THETA0_DEG, "doy": ddoy / T0_DAYS}
-                avail = {n: v for n, v in terms.items() if v is not None and not np.isnan(v)}
-                D = sum(WEIGHTS[n] * v for n, v in avail.items()) / sum(WEIGHTS[n] for n in avail)
+                D = sum(WEIGHTS[n] * (MISSING_TERM if v is None or np.isnan(v) else v) for n, v in terms.items())
                 rows.append({"storm_id": sid_c, "sid": sid, "ta": int(ta), "track_km": dist, "dv_kt": dv,
                              "dtheta_deg": dth, "ddoy_days": ddoy, "D": D, "sas": 100 * math.exp(-D)})
         if not rows:
